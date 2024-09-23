@@ -1,0 +1,102 @@
+---
+sidebar_position: 1
+---
+
+import Tabs from "@theme/Tabs";
+import TabItem from "@theme/TabItem";
+
+# List Payments
+
+```
+GET https://paylinks.uqualify.co.uk/api/v1/payments
+```
+
+The List Payments endpoint allows you to retrieve a list of all payment transactions associated with your organization. It is a valuable tool for tracking and reviewing your organization’s payment history, ensuring that you have an overview of all financial activities within the Uqualify platform.
+
+:::info
+
+Use pagination parameters to efficiently navigate through a large volume of payments.
+
+:::
+
+## Query Parameters
+
+| Parameter | Type    | Description                                                            |
+| --------- | ------- | ---------------------------------------------------------------------- |
+| after     | string  | Retrieve payments after this timestamp.                                |
+| before    | string  | Retrieve payments before this timestamp.                               |
+| limit     | integer | The maximum number of payments to retrieve (default=100, maximum=100). |
+| page      | integer | The page number of results to retrieve (≥ 1).                          |
+| since     | string  | Retrieve payments since this timestamp.                                |
+| sort      | string  | Sort order for payments (asc=ascending, desc=descending).              |
+| until     | string  | Retrieve payments until this timestamp.                                |
+
+## Example Request
+
+```bash
+curl --request GET \
+     --url https://paylinks.uqualify.co.uk/api/v1/payments \
+     --header 'X-API-KEY: API-KEY' \
+     --header 'accept: application/json'
+
+```
+
+## Responses
+
+<Tabs>
+  <TabItem value="200" label="200" default>
+
+| Field                                  | Type              | Description                                                                                                                                                                                   | Example |
+| -------------------------------------- | ----------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------- |
+| data                                   | object            | The data object containing the payments.                                                                                                                                                      |         |
+| data.items                             | array of objects  | A list of payment objects.                                                                                                                                                                    |         |
+| data.items.amount                      | string            | The amount associated with the payment.                                                                                                                                                       |         |
+| data.items.created_at                  | string            | The timestamp indicating when the payment was created.                                                                                                                                        |         |
+| data.items.crypto_transaction          | object            | The crypto transaction details.                                                                                                                                                               |         |
+| data.items.crypto_transaction.currency | string            | The currency of the payment.                                                                                                                                                                  |         |
+| data.items.customer                    | object            | The customer details.                                                                                                                                                                         |         |
+| data.items.customer.customer_id        | string            | The ID of the customer associated with the payment.                                                                                                                                           |         |
+| data.items.id                          | string            | The unique identifier of the payment.                                                                                                                                                         |         |
+| data.items.invoice_id                  | string            | The ID of the invoice associated with the payment.                                                                                                                                            |         |
+| data.items.next_action                 | string            | The next action related to the payment.                                                                                                                                                       |         |
+| data.items.org_id                      | string            | The ID of the organization associated with the payment.                                                                                                                                       |         |
+| data.items.parent_id                   | string            | The ID of the parent payment if this payment is part of a larger transaction.                                                                                                                 |         |
+| data.items.payment_link                | object            | The payment link details.                                                                                                                                                                     |         |
+| data.items.payment_link.payment_method | integer           | The payment method: 1 = Unknown, 2 = Merchantcontract, 3 = Proxywallet, 4 = Unblock, 5 = Card, 6 = Googlepay, 7 = Applepay, 8 = Paypal, 9 = Directdebit, 10 = Ramp, 11 = Rampcryptosettlement |         |
+| data.items.properties                  | object            | Additional properties associated with the payment.                                                                                                                                            |         |
+| data.items.scheduled_time              | integer           | The scheduled time for the payment.                                                                                                                                                           |         |
+| data.items.source                      | integer           | The source of this billing information: 1 = Lago, 2 = Uqualify, 3 = Stripe, 4 = Chargebee                                                                                                       |         |
+| data.items.status                      | integer           | The current status of the payment: 1 = Unknown, 2 = Requirespaymentmethod, 3 = Requiresconfirmation, 4 = Requiresaction, 5 = Processing, 6 = Succeeded, 7 = Canceled, 8 = Failed              |         |
+| data.items.updated_at                  | string            | The timestamp indicating when the payment was last updated.                                                                                                                                   |         |
+| data.items.v1                          | array of integers | An array of version integers.                                                                                                                                                                 |         |
+| data.items.last_update                 | string            | The timestamp indicating the last update time.                                                                                                                                                |         |
+| data.next                              | integer           | The number of the next page of results.                                                                                                                                                       |         |
+| data.total                             | integer           | The total number of items in the response.                                                                                                                                                    |         |
+| error                                  | boolean           | Indicates if there was an error.                                                                                                                                                              |         |
+
+  </TabItem>
+  <TabItem value="400" label="400">
+
+| Field               | Type             | Description                                 | Example               |
+| ------------------- | ---------------- | ------------------------------------------- | --------------------- |
+| error               | object           | The error returned by the server.           |                       |
+| error.code          | integer          | The error code returned by the server.      | 400                   |
+| error.errors        | array of objects | A list of detailed error objects.           |                       |
+| error.errors.domain | string           | The domain associated with the error.       | orders                |
+| error.errors.reason | string           | The reason for the error.                   | InsufficientQuantity  |
+| error.message       | string           | A descriptive message explaining the error. | Insufficient quantity |
+
+  </TabItem>
+  <TabItem value="500" label="500">
+
+| Field               | Type             | Description                                 | Example               |
+| ------------------- | ---------------- | ------------------------------------------- | --------------------- |
+| error               | object           | The error returned by the server.           |                       |
+| error.code          | integer          | The error code returned by the server.      | 500                   |
+| error.errors        | array of objects | A list of detailed error objects.           |                       |
+| error.errors.domain | string           | The domain associated with the error.       | orders                |
+| error.errors.reason | string           | The reason for the error.                   | Internal              |
+| error.message       | string           | A descriptive message explaining the error. | Internal server error |
+
+  </TabItem>
+</Tabs>

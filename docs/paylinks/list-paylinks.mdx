@@ -1,0 +1,98 @@
+---
+sidebar_position: 1
+---
+
+import Tabs from "@theme/Tabs";
+import TabItem from "@theme/TabItem";
+
+# List Paylinks
+
+```
+GET https://paylinks.uqualify.co.uk/api/v1/paylinks
+```
+
+The List Paylinks endpoint allows you to retrieve a comprehensive list of all pay links created within your organization on the Uqualify platform. Use this endpoint to efficiently manage and review all the payment links you have generated, ensuring they align with your business needs.
+
+:::info
+
+    Paylinks are created automatically when a plan is created. Each plan has a corresponding paylink that can be used to facilitate payments.
+
+:::
+
+## Query Parameters
+
+| Parameter | Type    | Description                                                |
+| --------- | ------- | ---------------------------------------------------------- |
+| after     | string  | Return paylinks after this cursor for pagination.          |
+| before    | string  | Return paylinks before this cursor for pagination.         |
+| limit     | integer | The maximum number of paylinks to return per page (1-100). |
+| page      | integer | The page number of the results to return (≥ 1).            |
+| since     | string  | Return paylinks created or updated since this timestamp.   |
+| sort      | string  | Sort order for the results.                                |
+| until     | string  | Return paylinks created or updated until this timestamp.   |
+
+## Example Request
+
+```bash
+curl --request GET \
+     --url https://paylinks.uqualify.co.uk/api/v1/paylinks \
+     --header 'X-API-KEY: API-KEY \
+     --header 'accept: application/json'
+```
+
+## Responses
+
+<Tabs>
+  <TabItem value="200" label="200" default>
+   
+| Field                        | Type       | Description                                           |
+|------------------------------|------------|-------------------------------------------------------|
+| data                         | object     | The data object containing the paylinks.              |
+| data.items                        | object      | An array of paylink objects.                          |
+| data.items.id                   | string     | The unique identifier for the paylink.                |
+| data.items.plan_id              | string     | The ID of the associated plan.                        |
+| data.items.invoice_id           | string     | The ID of the associated invoice.                     |
+| data.items.source               | string     | The source of the paylink.                            |
+| data.items.customer_ident_collection | boolean | Indicates if customer identification collection is enabled. |
+| data.items.shipping_address_collection | boolean | Indicates if shipping address collection is enabled.  |
+| data.items.tax_ident_collection | boolean    | Indicates if tax identification collection is enabled.|
+| data.items.enabled              | boolean    | Indicates if the paylink is enabled.                  |
+| data.items.deleted_at           | date-time  | The timestamp when the paylink was deleted.           |
+| data.items.created_by           | string     | The ID of the user who created the paylink.           |
+| data.items.updated_by           | string     | The ID of the user who last updated the paylink.      |
+| data.items.created_at           | date-time  | The timestamp when the paylink was created.           |
+| data.items.updated_at           | date-time  | The timestamp when the paylink was last updated.      |
+| data.items.metadata             | object     | Additional metadata associated with the paylink.      |
+| data.items.metadata.properties  | object     | Additional properties associated with the paylink.    |
+| data.items.plan                 | object     | The details of the associated plan.                   |
+| data.last_update                  | string     | The timestamp indicating when the data was last updated. |
+| data.next                         | integer    | The index of the next page of paylinks.               |
+| data.total                        | integer    | The total number of paylinks available.               |
+| error                        | boolean    | Indicates if there was an error.                      |
+
+  </TabItem>
+  <TabItem value="400" label="400">
+    
+| Field     | Type          | Description                                   | Example                  |
+|-----------|---------------|-----------------------------------------------|--------------------------|
+| error      | object       | The error returned by the server.       |                       |
+| error.code      | integer       | The error code returned by the server.       | 400                      |
+| error.errors    | object | A list of detailed error objects.         |                          |
+| error.error.domain  | string        | The domain associated with the error.        | orders                   |
+| error.error.reason  | string        | The reason for the error.                    | InsufficientQuantity     |
+| error.message | string        | A descriptive message explaining the error.  | Insufficient quantity     |
+
+  </TabItem>
+  <TabItem value="500" label="500">
+  
+| Field   | Type               | Description                              | Example                  |
+|---------|--------------------|------------------------------------------|--------------------------|
+| error      | object       | The error returned by the server.       |                       |
+| error.code    | integer            | The error code returned by the server.   | 500                      |
+| error.errors  | object   | A list of detailed error objects.        |                          |
+| error.errors.domain  | string             | The domain associated with the error.    | orders                   |
+| error.errors.reason  | string             | The reason for the error.                | Internal                 |
+| error.message | string             | A descriptive message explaining the error. | Internal server error    |
+
+  </TabItem>
+</Tabs>
