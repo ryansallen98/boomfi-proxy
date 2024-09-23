@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "docusaurus": "docusaurus",
-    "start": "nodemon index.js",
+    "start": "npm run build && nodemon index.js",
     "dev": "docusaurus start",
     "build": "docusaurus build",
     "swizzle": "docusaurus swizzle",
