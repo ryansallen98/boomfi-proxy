@@ -74,6 +74,113 @@ curl --request GET \
 | data.total                             | integer           | The total number of items in the response.                                                                                                                                                    |         |
 | error                                  | boolean           | Indicates if there was an error.                                                                                                                                                              |         |
 
+```json
+{
+  "data": {
+    "items": [
+      {
+        "amount": "100.00",
+        "created_at": "2023-01-01T12:00:00Z",
+        "crypto_transaction": {
+          "chain_id": 1,
+          "created_at": "2023-01-01T12:00:00Z",
+          "id": 0,
+          "payment_id": {
+            "string": "string",
+            "valid": true
+          },
+          "raw": [
+            0
+          ],
+          "sequence": "123456789",
+          "source": 1,
+          "status": 1,
+          "transaction_hash": "0x0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef",
+          "type": 1,
+          "updated_at": "2023-01-01T12:30:00Z"
+        },
+        "currency": "USD",
+        "customer": {
+          "created_at": "2023-01-01T12:00:00Z",
+          "deleted_at": "2023-01-05T10:00:00Z",
+          "email": "customer@example.com",
+          "id": "customer123",
+          "metadata": {},
+          "name": "John Doe",
+          "org_id": "org123",
+          "phone": 1234567890,
+          "properties": {},
+          "reference": "REF-123456",
+          "updated_at": "2023-01-02T09:00:00Z",
+          "wallet_address": 4.059726770363619e+44
+        },
+        "customer_id": "customer123",
+        "id": "payment123",
+        "invoice_id": "invoice123",
+        "next_action": "verify_payment",
+        "org_id": "org123",
+        "parent_id": "parent_payment123",
+        "payment_link": {
+          "id": "2Z4zsnmp37AF3WKM6N2j4wmeakr",
+          "plan_id": "2Z4zspFMhs2pMYjcR3l6JpJaWdA",
+          "invoice_id": "",
+          "source": "BoomFi",
+          "customer_ident_collection": false,
+          "shipping_address_collection": false,
+          "tax_ident_collection": false,
+          "enabled": true,
+          "deleted_at": "2023-12-04T13:25:48.499Z",
+          "created_by": "2TzGhPCAfFWLPBjtc6h52Aao2S6",
+          "updated_by": "",
+          "created_at": "2023-12-04T13:25:48.496Z",
+          "updated_at": "2023-12-04T13:25:48.499Z",
+          "metadata": {},
+          "properties": {
+            "short_code": "AANj9Dm7Zl"
+          },
+          "plan": {
+            "id": "2Z4zspFMhs2pMYjcR3l6JpJaWdA",
+            "org_id": "2Tpmnmh6GHJXumKN1oBy2u56Ima",
+            "source": "Lago",
+            "name": "test paylink 12 04",
+            "type": "OneTime",
+            "billing_scheme": "FlatFee",
+            "price": "1",
+            "currency": "USD",
+            "available_quantity": 0,
+            "trial_period": "",
+            "recurring_interval": "Unknown",
+            "recurring_interval_count": 1,
+            "recurring_usage_type": "Unknown",
+            "reference": "",
+            "enabled": true,
+            "v1": "eyJwbGFucyI6IHsiaWQiOiAiYWE1ZmI5MjQtMmMzZi00NzcwLTkyZDEtMjFjYmY3ODc3ODc2IiwgIm5hbWUiOiAidGVzdCBwYXlsaW5rIDEyIDA0IiwgInN0YXR1cyI6ICJhY3RpdmUiLCAiaW50ZXJ2YWwiOiBudWxsLCAicmVmZXJlbmNlIjogIiIsICJhbW91bnRfd2VpIjogIjEwMCIsICJjcmVhdGVkX2F0IjogIjIwMjMtMTI...",
+            "created_by": "2TzGhPCAfFWLPBjtc6h52Aao2S6",
+            "created_at": "2023-12-04T13:25:47.656Z",
+            "updated_at": "2023-12-04T13:25:48.491Z",
+            "deleted_at": null,
+            "metadata": {}
+          }
+        },
+        "payment_method": 1,
+        "properties": {},
+        "scheduled_time": 1643712000,
+        "source": 1,
+        "status": 1,
+        "updated_at": "string",
+        "v1": [
+          0
+        ]
+      }
+    ],
+    "last_update": "2021-01-01T00:00:00Z",
+    "next": 10,
+    "total": 10
+  },
+  "error": true
+}
+```
+
   </TabItem>
   <TabItem value="400" label="400">
 
@@ -86,6 +193,21 @@ curl --request GET \
 | error.errors.reason | string           | The reason for the error.                   | InsufficientQuantity  |
 | error.message       | string           | A descriptive message explaining the error. | Insufficient quantity |
 
+```json
+{
+  "error": {
+    "code": 400,
+    "errors": [
+      {
+        "domain": "orders",
+        "reason": "InsufficientQuantity"
+      }
+    ],
+    "message": "Insufficient quantity"
+  }
+}
+```
+
   </TabItem>
   <TabItem value="500" label="500">
 
@@ -97,6 +219,21 @@ curl --request GET \
 | error.errors.domain | string           | The domain associated with the error.       | orders                |
 | error.errors.reason | string           | The reason for the error.                   | Internal              |
 | error.message       | string           | A descriptive message explaining the error. | Internal server error |
+
+```json
+{
+  "error": {
+    "code": 500,
+    "errors": [
+      {
+        "domain": "orders",
+        "reason": "Internal"
+      }
+    ],
+    "message": "Internal server error"
+  }
+}
+```
 
   </TabItem>
 </Tabs>

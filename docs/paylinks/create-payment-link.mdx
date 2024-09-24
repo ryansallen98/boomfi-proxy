@@ -82,6 +82,54 @@ https://pay.boomfi.xyz/2m2EcPjK0GACD29VHRHvduBKsAd
 | data.plan                        | object    | The details of the associated plan.                         |
 | error                            | boolean   | Indicates if there was an error.                            |
 
+```json
+{
+  "data": {
+    "id": "2Z4zsnmp37AF3WKM6N2j4wmeakr",
+    "plan_id": "2Z4zspFMhs2pMYjcR3l6JpJaWdA",
+    "invoice_id": "",
+    "source": "BoomFi",
+    "customer_ident_collection": false,
+    "shipping_address_collection": false,
+    "tax_ident_collection": false,
+    "enabled": true,
+    "deleted_at": "2023-12-04T13:25:48.499Z",
+    "created_by": "2TzGhPCAfFWLPBjtc6h52Aao2S6",
+    "updated_by": "",
+    "created_at": "2023-12-04T13:25:48.496Z",
+    "updated_at": "2023-12-04T13:25:48.499Z",
+    "metadata": {},
+    "properties": {
+      "short_code": "AANj9Dm7Zl"
+    },
+    "plan": {
+      "id": "2Z4zspFMhs2pMYjcR3l6JpJaWdA",
+      "org_id": "2Tpmnmh6GHJXumKN1oBy2u56Ima",
+      "source": "Lago",
+      "name": "test paylink 12 04",
+      "type": "OneTime",
+      "billing_scheme": "FlatFee",
+      "price": "1",
+      "currency": "USD",
+      "available_quantity": 0,
+      "trial_period": "",
+      "recurring_interval": "Unknown",
+      "recurring_interval_count": 1,
+      "recurring_usage_type": "Unknown",
+      "reference": "",
+      "enabled": true,
+      "v1": "eyJwbGFucyI6IHsiaWQiOiAiYWE1ZmI5MjQtMmMzZi00NzcwLTkyZDEtMjFjYmY3ODc3ODc2IiwgIm5hbWUiOiAidGVzdCBwYXlsaW5rIDEyIDA0IiwgInN0YXR1cyI6ICJhY3RpdmUiLCAiaW50ZXJ2YWwiOiBudWxsLCAicmVmZXJlbmNlIjogIiIsICJhbW91bnRfd2VpIjogIjEwMCIsICJjcmVhdGVkX2F0IjogIjIwMjMtMTI...",
+      "created_by": "2TzGhPCAfFWLPBjtc6h52Aao2S6",
+      "created_at": "2023-12-04T13:25:47.656Z",
+      "updated_at": "2023-12-04T13:25:48.491Z",
+      "deleted_at": null,
+      "metadata": {}
+    }
+  },
+  "error": true
+}
+```
+
   </TabItem>
   <TabItem value="400" label="400">
 
@@ -94,6 +142,21 @@ https://pay.boomfi.xyz/2m2EcPjK0GACD29VHRHvduBKsAd
 | error.errors.reason | string           | The reason for the error.                   | InsufficientQuantity  |
 | error.message       | string           | A descriptive message explaining the error. | Insufficient quantity |
 
+```json
+{
+  "error": {
+    "code": 400,
+    "errors": [
+      {
+        "domain": "orders",
+        "reason": "InsufficientQuantity"
+      }
+    ],
+    "message": "Insufficient quantity"
+  }
+}
+```
+
   </TabItem>
   <TabItem value="500" label="500">
 
@@ -105,6 +168,21 @@ https://pay.boomfi.xyz/2m2EcPjK0GACD29VHRHvduBKsAd
 | error.errors.domain | string           | The domain associated with the error.       | orders                |
 | error.errors.reason | string           | The reason for the error.                   | Internal              |
 | error.message       | string           | A descriptive message explaining the error. | Internal server error |
+
+```json
+{
+  "error": {
+    "code": 500,
+    "errors": [
+      {
+        "domain": "orders",
+        "reason": "Internal"
+      }
+    ],
+    "message": "Internal server error"
+  }
+}
+```
 
   </TabItem>
 </Tabs>
