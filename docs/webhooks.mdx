@@ -1,0 +1,166 @@
+---
+sidebar_position: 6
+---
+
+# Webhooks
+
+Webhooks are a way for our system to send real-time notifications to your application when certain events occur. By setting up webhooks, you can automate actions and keep your application in sync with our platform. For example, you can use webhooks to receive notifications when a payment is created or updated, allowing you to update your records or trigger other processes in response to these events.
+
+:::info
+
+    To set your default webhook URL, please contact our support team with the endpoint you would like to receive the webhook events.
+
+:::
+
+## Payload Response
+
+| Field                   | Type    | Description                                             |
+| ----------------------- | ------- | ------------------------------------------------------- |
+| id                      | string  | Unique identifier of the payment.                       |
+| parent_id               | string  | ID of the parent payment, if applicable.                |
+| org_id                  | string  | ID of the organization associated with the payment.     |
+| amount                  | string  | Amount associated with the payment.                     |
+| currency                | string  | Currency of the payment.                                |
+| invoice_id              | string  | ID of the invoice associated with the payment.          |
+| source                  | string  | Source of the payment.                                  |
+| payment_method          | string  | Payment method used.                                    |
+| customer_id             | string  | ID of the customer associated with the payment.         |
+| status                  | string  | Current status of the payment.                          |
+| next_action             | string  | Next action related to the payment.                     |
+| scheduled_time          | integer | Scheduled time for the payment.                         |
+| created_at              | string  | Timestamp when the payment was created.                 |
+| updated_at              | string  | Timestamp when the payment was last updated.            |
+| amount_usd              | string  | Amount in USD.                                          |
+| plan_currency           | string  | Currency of the plan.                                   |
+| plan_price              | string  | Price of the plan.                                      |
+| plan                    | object  | Details of the associated plan.                         |
+| plan.id                 | string  | ID of the plan.                                         |
+| plan.name               | string  | Name of the plan.                                       |
+| plan.type               | string  | Type of the plan.                                       |
+| plan.price              | string  | Price of the plan.                                      |
+| plan.currency           | string  | Currency of the plan.                                   |
+| plan.reference          | string  | Reference for the plan.                                 |
+| org                     | object  | Details of the organization.                            |
+| org.id                  | string  | ID of the organization.                                 |
+| org.name                | string  | Name of the organization.                               |
+| customer                | object  | Details of the customer.                                |
+| customer.id             | string  | ID of the customer.                                     |
+| customer.org_id         | string  | ID of the organization associated with the customer.    |
+| customer.name           | string  | Name of the customer.                                   |
+| customer.email          | string  | Email of the customer.                                  |
+| customer.phone          | string  | Phone number of the customer.                           |
+| customer.wallet_address | string  | Wallet address of the customer.                         |
+| customer.deleted_at     | string  | Timestamp when the customer was deleted, if applicable. |
+| customer.reference      | string  | Reference for the customer.                             |
+| customer.metadata       | object  | Additional metadata associated with the customer.       |
+| customer.created_at     | string  | Timestamp when the customer was created.                |
+| customer.updated_at     | string  | Timestamp when the customer was last updated.           |
+| event                   | string  | Type of the event.                                      |
+
+## Payment Created Event
+
+When a payment is created, a webhook event is triggered with the following payload:
+
+### Example Payload
+
+```json
+{
+  "id": "pay_2msVFYlhbbHs5j0dZ2glpTHAeIO",
+  "parent_id": "",
+  "org_id": "2m1HtGFFlNWzSCgsK0IkEqfnYQx",
+  "amount": "5.31",
+  "currency": "USDT",
+  "invoice_id": "2msVFdhDAtseYSXbJpIDJ5Swajn",
+  "source": "BoomFi",
+  "payment_method": "ProxyWallet",
+  "customer_id": "2msVFcFPbaiMCQKDP8XpLVnXyuv",
+  "status": "Processing",
+  "next_action": "",
+  "scheduled_time": 0,
+  "created_at": "2024-10-02T10:32:47.684Z",
+  "updated_at": "2024-10-02T10:32:48.002043693Z",
+  "amount_usd": "5.308990560620399448",
+  "plan_currency": "USDT",
+  "plan_price": "5",
+  "plan": {
+    "id": "pln_2msV5KmB1PQ2yVfSwjw2pDSnmV2",
+    "name": "Test Payment 3",
+    "type": "OneTime",
+    "price": "5",
+    "currency": "USDT",
+    "reference": "payment-reference-03"
+  },
+  "org": {
+    "id": "org_2m1HtGFFlNWzSCgsK0IkEqfnYQx",
+    "name": "UQG Limited"
+  },
+  "customer": {
+    "id": "cus_2msVFcFPbaiMCQKDP8XpLVnXyuv",
+    "org_id": "2m1HtGFFlNWzSCgsK0IkEqfnYQx",
+    "name": "Adrian Lynch",
+    "email": "al+boomfo@uqualify.co",
+    "phone": "",
+    "wallet_address": "",
+    "deleted_at": null,
+    "reference": "",
+    "metadata": {},
+    "created_at": "2024-10-02T10:32:47.688Z",
+    "updated_at": "2024-10-02T10:32:47.688Z"
+  },
+  "event": "Payment.Created"
+}
+```
+
+## Payment Updated Event
+
+When a payment is updated, a webhook event is triggered with the following payload:
+
+### Example Payload
+
+```json
+{
+  "id": "pay_2msWZ4gvssEUjIbEweL3LKunJ8L",
+  "parent_id": "",
+  "org_id": "2m1HtGFFlNWzSCgsK0IkEqfnYQx",
+  "amount": "5.31",
+  "currency": "USDT",
+  "invoice_id": "2msWZ3nGLjxgWP1nkd0qsgKU6km",
+  "source": "BoomFi",
+  "payment_method": "ProxyWallet",
+  "customer_id": "2msWWaYvMlsqRCugZMxvraymU5V",
+  "status": "Succeeded",
+  "next_action": "",
+  "scheduled_time": 0,
+  "created_at": "2024-10-02T10:43:35.293Z",
+  "updated_at": "2024-10-02T10:49:04.098324068Z",
+  "amount_usd": "5.310581127205863654",
+  "plan_currency": "USDT",
+  "plan_price": "5",
+  "plan": {
+    "id": "pln_2msV5KmB1PQ2yVfSwjw2pDSnmV2",
+    "name": "Test Payment 3",
+    "type": "OneTime",
+    "price": "5",
+    "currency": "USDT",
+    "reference": "payment-reference-03"
+  },
+  "org": {
+    "id": "org_2m1HtGFFlNWzSCgsK0IkEqfnYQx",
+    "name": "UQG Limited"
+  },
+  "customer": {
+    "id": "cus_2msWWaYvMlsqRCugZMxvraymU5V",
+    "org_id": "2m1HtGFFlNWzSCgsK0IkEqfnYQx",
+    "name": "Daniel Rodwell",
+    "email": "dr@uqualify.co",
+    "phone": "",
+    "wallet_address": "TM6w3asAwtipDS6TcB8irboLZLBqm3gFG5",
+    "deleted_at": null,
+    "reference": "",
+    "metadata": {},
+    "created_at": "2024-10-02T10:43:16.759Z",
+    "updated_at": "2024-10-02T10:43:16.759Z"
+  },
+  "event": "Payment.Updated"
+}
+```
