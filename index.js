@@ -6,6 +6,11 @@ require('dotenv').config();
 // Create an Express application
 const app = express();
 
+app.get('/', (req, res) => {
+  console.log('Redirecting to /docs/overview/');
+  res.redirect('/docs/overview/');
+});
+
 // Serve the static files from the Docusaurus build directory
 app.use(express.static(path.join(__dirname, 'build')));
 
