@@ -1,1 +1,0 @@
-"use strict";(self.webpackChunkboomfi_proxy=self.webpackChunkboomfi_proxy||[]).push([[2634],{192:(i,o,n)=>{n.r(o),n.d(o,{default:()=>r});var t=n(781),e=(n(6540),n(4848));function r(){return(0,e.jsx)(t.A,{title:"Uqualify | Paylinks Docs",description:"Documentation for paylinks in partnership with BoomFi"})}}}]);
