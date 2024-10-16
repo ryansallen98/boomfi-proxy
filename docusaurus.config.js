@@ -60,6 +60,7 @@ const config = {
         logo: {
           alt: 'uqualify logo',
           src: 'img/logo_full_green.svg',
+          href: '/docs/overview/',
         },
         items: [
           {
